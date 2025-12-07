@@ -45,7 +45,7 @@
                     <p class="text-md font-serif text-gray-500 uppercase tracking-wide mb-4">
                         KURSFORMATE
                     </p>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    <h2 class="text-3xl md:text-4xl font-semi-bold text-gray-900 mb-4">
                         Professionelle Rhetorikseminare für starke Rednerpersönlichkeiten
                     </h2>
                 </div>
@@ -139,7 +139,7 @@
                         </p>
                         <div class="flex-grow"></div>
                         <div>
-                            <h2 class="text-4xl text-[#153E75] font-bold mb-6">
+                            <h2 class="text-4xl text-[#153E75] font-semi-bold mb-6">
                                 Maximilian Höslinger
                             </h2>
                             <p class="text-lg text-gray-700 leading-relaxed mb-8">
