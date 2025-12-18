@@ -1,15 +1,26 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
+import ColorThemePicker from './components/ColorThemePicker.vue'
 
 const isMenuOpen = ref(false)
 const isScrolled = ref(false)
+const isColorDropdownOpen = ref(false)
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
+  isColorDropdownOpen.value = false
 }
 
 const closeMenu = () => {
   isMenuOpen.value = false
+}
+
+const toggleColorDropdown = () => {
+  isColorDropdownOpen.value = !isColorDropdownOpen.value
+}
+
+const closeColorDropdown = () => {
+  isColorDropdownOpen.value = false
 }
 
 const handleScroll = () => {
@@ -29,7 +40,7 @@ onUnmounted(() => {
   <div class="app-layout">
     <!-- Header with Logo and Navigation -->
     <header 
-      :class="['bg-white border-b border-gray-300 flex items-center fixed top-0 left-0 right-0 z-50 transition-all duration-300', isScrolled ? 'py-3' : 'py-6']"
+      :class="['bg-white flex items-center fixed top-0 left-0 right-0 z-50 transition-all duration-300', isScrolled ? 'py-3' : 'py-6']"
     >
       <div class="max-w-7xl mx-auto px-6 flex justify-between items-center w-full">
         <!-- Logo Left -->
@@ -37,12 +48,12 @@ onUnmounted(() => {
           <RouterLink to="/" class="no-underline" @click="closeMenu">
             <div>
               <h2 
-                :class="['m-0 font-bold leading-tight text-[#153E75] transition-all duration-300', isScrolled ? 'text-lg md:text-xl' : 'text-xl md:text-2xl']"
+                :class="['m-0 font-bold leading-tight text-primary-600 transition-all duration-300', isScrolled ? 'text-lg md:text-xl' : 'text-xl md:text-2xl']"
               >
                 Maximilian Höslinger
               </h2>
               <p 
-                :class="['m-0 text-orange-500 font-normal transition-all duration-300', isScrolled ? 'text-[10px] md:text-xs' : 'text-xs md:text-sm']"
+                :class="['m-0 text-secondary-500 font-semi-bold transition-all duration-300', isScrolled ? 'text-[10px] md:text-xs' : 'text-xs md:text-sm']"
               >
                 Wirkungsvoll kommunizieren.
               </p>
@@ -55,7 +66,28 @@ onUnmounted(() => {
           <RouterLink to="/" class="nav-link">Startseite</RouterLink>
           <RouterLink to="/ueber" class="nav-link">Über</RouterLink>
           <RouterLink to="/kurse" class="nav-link">Kurse & Trainings</RouterLink>
-          <RouterLink to="/kontakt" class="bg-orange-500 text-white px-6 py-2 font-semibold hover:bg-orange-600 transition-colors no-underline">
+          
+          <!-- Color Theme Dropdown -->
+          <div class="relative">
+            <button 
+              @click="toggleColorDropdown"
+              class="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 transition-colors text-sm font-medium text-gray-700"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+              </svg>
+              Farben
+            </button>
+            
+            <div 
+              v-show="isColorDropdownOpen"
+              class="absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
+            >
+              <ColorThemePicker variant="desktop" @close="closeColorDropdown" />
+            </div>
+          </div>
+          
+          <RouterLink to="/kontakt" class="bg-secondary-500 text-white px-6 py-2 font-semibold hover:bg-secondary-600 transition-colors no-underline">
             Kontakt
           </RouterLink>
         </nav>
@@ -81,9 +113,9 @@ onUnmounted(() => {
 
     <!-- Full Screen Mobile Menu -->
     <div 
-      :class="['fixed inset-0 bg-white z-40 flex items-center justify-center transition-all duration-300 lg:hidden', isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible']"
+      :class="['fixed inset-0 bg-white z-40 flex items-center justify-center transition-all duration-300 lg:hidden overflow-y-auto', isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible']"
     >
-      <nav class="flex flex-col gap-8 items-center text-center">
+      <nav class="flex flex-col gap-8 items-center text-center py-20">
         <RouterLink 
           to="/" 
           class="text-3xl font-semibold text-gray-800 hover:text-gray-600 transition-colors"

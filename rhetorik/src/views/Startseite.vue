@@ -1,10 +1,22 @@
 <script setup lang="ts">
+import { useHead } from '@unhead/vue'
+import CtaSection from '../components/CtaSection.vue'
+
+useHead({
+  title: 'Rhetoriktraining | Maximilian Höslinger',
+  meta: [
+    {
+      name: 'description',
+      content: 'Rhetoriktrainings für authentische Kommunikation. Souverän auftreten, Menschen erreichen, Wirkung entfalten.',
+    },
+  ],
+})
 </script>
 
 <template>
     <div class="startseite">
         <!-- Hero Section -->
-        <section class="bg-[#153E75] py-10 w-full md:py-20">
+        <section class="bg-primary-600 py-10 w-full md:py-20">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="flex flex-col md:grid md:grid-cols-[1fr_auto_1fr] items-end md:h-[700px]">
                     <!-- Text Left -->
@@ -19,7 +31,7 @@
                                 Rhetoriktrainings für authentische Kommunikation.
                             </p>
                             <RouterLink to="/kontakt"
-                                class="inline-block bg-white text-[#153E75] px-6 md:px-8 py-3 md:py-4 font-semibold hover:bg-gray-100 transition-colors">
+                                class="inline-block bg-white text-primary-600 px-6 md:px-8 py-3 md:py-4 font-semibold hover:bg-gray-100 transition-colors">
                                 JETZT ANMELDEN
                             </RouterLink>
                         </div>
@@ -53,9 +65,9 @@
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
                     <!-- Course 1 -->
                     <RouterLink to="/kurse" class="group cursor-pointer">
-                        <h3 class="text-xl font-bold text-[#153E75] mb-3 flex items-center gap-2">
+                        <h3 class="text-xl font-bold text-primary-600 mb-3 flex items-center gap-2">
                             Grundlagentraining Rhetorik
-                            <span class="text-[#153E75] transition-transform group-hover:translate-x-1">→</span>
+                            <span class="text-primary-600 transition-transform group-hover:translate-x-1">⟶</span>
                         </h3>
                         <p class="text-gray-700">
                             Basistraining für klare und überzeugende Kommunikation mit grundlegender Arbeit an Auftritt, Stimme und Struktur
@@ -64,9 +76,9 @@
 
                     <!-- Course 2 -->
                     <RouterLink to="/kurse" class="group cursor-pointer">
-                        <h3 class="text-xl font-bold text-[#153E75] mb-3 flex items-center gap-2">
+                        <h3 class="text-xl font-bold text-primary-600 mb-3 flex items-center gap-2">
                             Körpersprache & Präsenz
-                            <span class="text-[#153E75] transition-transform group-hover:translate-x-1">→</span>
+                            <span class="text-primary-600 transition-transform group-hover:translate-x-1">⟶</span>
                         </h3>
                         <p class="text-gray-700">
                             Training für Präsenz im Raum, selbstbewusstes Auftreten und lebendige Präsentation der eigenen Standpunkte
@@ -75,9 +87,9 @@
 
                     <!-- Course 3 -->
                     <RouterLink to="/kurse" class="group cursor-pointer">
-                        <h3 class="text-xl font-bold text-[#153E75] mb-3 flex items-center gap-2">
+                        <h3 class="text-xl font-bold text-primary-600 mb-3 flex items-center gap-2">
                             Stimme & Atmung
-                            <span class="text-[#153E75] transition-transform group-hover:translate-x-1">→</span>
+                            <span class="text-primary-600 transition-transform group-hover:translate-x-1">⟶</span>
                         </h3>
                         <p class="text-gray-700">
                             Training für die wichtigsten Werkzeuge in jeder Redesituation – Wege zu mehr Modulation und Varianz in der Stimme
@@ -86,9 +98,9 @@
 
                     <!-- Course 4 -->
                     <RouterLink to="/kurse" class="group cursor-pointer">
-                        <h3 class="text-xl font-bold text-[#153E75] mb-3 flex items-center gap-2">
+                        <h3 class="text-xl font-bold text-primary-600 mb-3 flex items-center gap-2">
                             Inhalt & Struktur
-                            <span class="text-[#153E75] transition-transform group-hover:translate-x-1">→</span>
+                            <span class="text-primary-600 transition-transform group-hover:translate-x-1">⟶</span>
                         </h3>
                         <p class="text-gray-700">
                             Fokus auf das gesprochene Wort durch Übungen zu Aufbau, Struktur und Formulierung von Argumenten und Reden
@@ -97,9 +109,9 @@
 
                     <!-- Course 5 -->
                     <RouterLink to="/kurse" class="group cursor-pointer">
-                        <h3 class="text-xl font-bold text-[#153E75] mb-3 flex items-center gap-2">
+                        <h3 class="text-xl font-bold text-primary-600 mb-3 flex items-center gap-2">
                             Rhetorik für Fortgeschrittene
-                            <span class="text-[#153E75] transition-transform group-hover:translate-x-1">→</span>
+                            <span class="text-primary-600 transition-transform group-hover:translate-x-1">⟶</span>
                         </h3>
                         <p class="text-gray-700">
                             Aufbaukurs mit Vertiefung zur Weiterentwicklung erfahrener Rednerpersönlichkeiten
@@ -108,9 +120,9 @@
 
                     <!-- Course 6 -->
                     <RouterLink to="/kurse" class="group cursor-pointer">
-                        <h3 class="text-xl font-bold text-[#153E75] mb-3 flex items-center gap-2">
+                        <h3 class="text-xl font-bold text-primary-600 mb-3 flex items-center gap-2">
                             Individuelles Einzeltraining
-                            <span class="text-[#153E75] transition-transform group-hover:translate-x-1">→</span>
+                            <span class="text-primary-600 transition-transform group-hover:translate-x-1">⟶</span>
                         </h3>
                         <p class="text-gray-700">
                             Ihr persönliches Training zur Vorbereitung einer konkreten Redesituation oder als begleitendes Feedback
@@ -125,21 +137,25 @@
         <!-- Trainer Section -->
         <section class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="flex flex-col md:flex-row gap-24">
+                <div class="flex flex-col md:grid md:grid-cols-[1fr_auto_1fr] gap-4 items-stretch">
                     <!-- Image Left -->
-                    <div class="w-full md:w-1/2">
+                    <div class="w-full">
                         <img src="@/assets/images/startbild.jpg" alt="Maximilian Höslinger"
                             class="w-full h-auto object-cover" />
                     </div>
 
+                    <!-- Gray Separator Line (Center) -->
+                    <div class="md:hidden w-full h-px bg-gray-300 my-8"></div>
+                    <div class="hidden md:block w-px bg-gray-300 self-stretch mx-12"></div>
+
                     <!-- Text Right -->
-                    <div class="w-full md:w-1/2 flex flex-col">
+                    <div class="w-full flex flex-col">
                         <p class="text-md font-serif text-gray-500 uppercase tracking-wide mb-4">
                             IHR TRAINER
                         </p>
                         <div class="flex-grow"></div>
                         <div>
-                            <h2 class="text-4xl text-[#153E75] font-semi-bold mb-6">
+                            <h2 class="text-4xl text-primary-600 font-semi-bold mb-6">
                                 Maximilian Höslinger
                             </h2>
                             <p class="text-lg text-gray-700 leading-relaxed mb-8">
@@ -149,7 +165,7 @@
                                 Ihre Rednerpersönlichkeit abgestimmt und auf Augenhöhe.
                             </p>
                             <RouterLink to="/ueber"
-                                class="inline-block border-2 border-[#153E75] text-[#153E75] px-8 py-3 font-semibold hover:bg-[#153E75] hover:text-white transition-colors">
+                                class="inline-block border-2 border-primary-600 text-primary-600 px-8 py-3 font-semibold hover:bg-primary-600 hover:text-white transition-colors">
                                 WEITERLESEN
                             </RouterLink>
                         </div>
@@ -158,6 +174,8 @@
             </div>
         </section>
 
+        <!-- CTA Section -->
+        <CtaSection />
 
     </div>
 </template>

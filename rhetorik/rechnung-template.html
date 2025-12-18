@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rechnung</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* Hauptcontainer */
+        .main-container {
+            display: flex;
+            gap: 20px;
+            max-width: 1400px;
+        }
+
+        /* Container für Browser-Vorschau */
+        .page-container {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20mm;
+        }
+
+        /* Editor Sidebar */
+        .editor-sidebar {
+            width: 350px;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .editor-sidebar h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .editor-section {
+            margin-bottom: 25px;
+        }
+
+        .editor-section h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #333;
+            color: white;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #555;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            padding: 6px 10px;
+            font-size: 11px;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-edit {
+            background-color: #007bff;
+            color: white;
+            padding: 6px 10px;
+            font-size: 11px;
+            margin-right: 5px;
+        }
+
+        .btn-edit:hover {
+            background-color: #0056b3;
+        }
+
+        .positions-list {
+            margin-top: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .position-item {
+            background-color: #f9f9f9;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            border-left: 3px solid #333;
+        }
+
+        .position-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .position-item-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .position-item-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .position-item-details {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .position-item-price {
+            font-size: 13px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 8px;
+        }
+
+        .info-text {
+            font-size: 11px;
+            color: #999;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        .btn-pdf {
+            background-color: #28a745;
+            color: white;
+            width: 100%;
+            margin-bottom: 20px;
+            font-size: 14px;
+            padding: 12px 16px;
+        }
+
+        .btn-pdf:hover {
+            background-color: #218838;
+        }
+
+        .btn-pdf::before {
+            content: "📄 ";
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .company-info {
+            flex: 1;
+        }
+
+        .company-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .company-details {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .invoice-title {
+            text-align: right;
+            flex: 1;
+        }
+
+        .invoice-title h1 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .invoice-number {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Empfänger */
+        .recipient {
+            margin-bottom: 30px;
+        }
+
+        .recipient-label {
+            font-size: 10px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .recipient-address {
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* Rechnungsdetails */
+        .invoice-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .detail-item {
+            font-size: 12px;
+        }
+
+        .detail-label {
+            color: #666;
+            margin-bottom: 3px;
+        }
+
+        .detail-value {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Tabelle */
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        .invoice-table thead {
+            background-color: #333;
+            color: white;
+        }
+
+        .invoice-table th {
+            padding: 12px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .invoice-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 12px;
+        }
+
+        .invoice-table tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Summen */
+        .totals {
+            margin-left: auto;
+            width: 300px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 12px;
+        }
+
+        .total-row.subtotal {
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .total-row.tax {
+            color: #666;
+        }
+
+        .total-row.final {
+            border-top: 2px solid #333;
+            font-size: 16px;
+            font-weight: bold;
+            padding-top: 12px;
+            margin-top: 8px;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .payment-info {
+            margin-bottom: 20px;
+        }
+
+        .payment-info h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .payment-details {
+            font-size: 11px;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .footer-note {
+            font-size: 10px;
+            color: #999;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Druck-Styles */
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+                display: block;
+            }
+
+            .main-container {
+                display: block;
+            }
+
+            .editor-sidebar {
+                display: none !important;
+            }
+
+            .page-container {
+                width: 210mm;
+                height: 297mm;
+                margin: 0;
+                padding: 20mm;
+                box-shadow: none;
+            }
+
+            @page {
+                size: A4;
+                margin: 0;
+            }
+
+            /* Hintergrundfarben im Druck erzwingen */
+            .invoice-table thead {
+                background-color: #333 !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .invoice-details {
+                background-color: #f9f9f9 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .invoice-table td {
+                border-bottom: 1px solid #e0e0e0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .total-row.subtotal {
+                border-top: 1px solid #e0e0e0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .total-row.final {
+                border-top: 2px solid #333 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .footer {
+                border-top: 1px solid #e0e0e0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- Editor Sidebar -->
+        <div class="editor-sidebar">
+            <h2>Rechnungs-Editor</h2>
+
+            <!-- PDF Button -->
+            <button class="btn btn-primary btn-pdf" onclick="printToPDF()">Als PDF speichern</button>
+
+            <!-- Firma bearbeiten -->
+            <div class="editor-section">
+                <h3>Firmeninformationen</h3>
+                <div class="form-group">
+                    <label>Firmenname</label>
+                    <input type="text" id="companyName" value="Ihre Firma GmbH">
+                </div>
+                <div class="form-group">
+                    <label>Adresse</label>
+                    <textarea id="companyAddress">Musterstraße 123
+12345 Musterstadt
+Tel: +49 (0) 123 456789
+E-Mail: info@ihre-firma.de
+www.ihre-firma.de</textarea>
+                </div>
+                <button class="btn btn-primary" onclick="updateCompanyInfo()">Aktualisieren</button>
+            </div>
+
+            <!-- Empfänger bearbeiten -->
+            <div class="editor-section">
+                <h3>Empfänger</h3>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="recipientName" value="Max Mustermann">
+                </div>
+                <div class="form-group">
+                    <label>Adresse</label>
+                    <textarea id="recipientAddress">Beispielweg 456
+54321 Beispielstadt</textarea>
+                </div>
+                <button class="btn btn-primary" onclick="updateRecipient()">Aktualisieren</button>
+            </div>
+
+            <!-- Rechnungsdetails -->
+            <div class="editor-section">
+                <h3>Rechnungsdetails</h3>
+                <div class="form-group">
+                    <label>Rechnungsnummer</label>
+                    <input type="text" id="invoiceNumber" value="2024-001">
+                </div>
+                <div class="form-group">
+                    <label>Rechnungsdatum</label>
+                    <input type="date" id="invoiceDate" value="2024-12-08">
+                </div>
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="includeTax" checked onchange="toggleTax()"
+                            style="width: auto; cursor: pointer;">
+                        <span>Mehrwertsteuer (19%) anzeigen</span>
+                    </label>
+                </div>
+                <button class="btn btn-primary" onclick="updateInvoiceDetails()">Aktualisieren</button>
+            </div>
+
+            <!-- Position hinzufügen -->
+            <div class="editor-section">
+                <h3>Position hinzufügen / bearbeiten</h3>
+                <input type="hidden" id="editingIndex" value="">
+                <div class="form-group">
+                    <label>Vorlage wählen (optional)</label>
+                    <select id="serviceTemplate" onchange="selectTemplate()">
+                        <option value="">-- Oder manuell eingeben --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Beschreibung</label>
+                    <input type="text" id="itemDescription" placeholder="z.B. Website Redesign">
+                </div>
+                <div class="form-group">
+                    <label>Menge</label>
+                    <input type="number" id="itemQuantity" value="1" min="1">
+                </div>
+                <div class="form-group">
+                    <label>Einzelpreis (€)</label>
+                    <input type="number" id="itemPrice" value="0" step="0.01" min="0">
+                </div>
+                <button class="btn btn-primary" onclick="addOrUpdateItem()" id="addItemBtn">Position hinzufügen</button>
+                <p class="info-text">Positionen werden automatisch in der Rechnung aktualisiert</p>
+            </div>
+
+            <!-- Positionen Liste -->
+            <div class="editor-section">
+                <h3>Positionen</h3>
+                <div class="positions-list" id="positionsList">
+                    <!-- Wird dynamisch befüllt -->
+                </div>
+            </div>
+        </div>
+
+        <div class="page-container">
+            <!-- Header -->
+            <div class="header">
+                <div class="company-info">
+                    <div class="company-name">Ihre Firma GmbH</div>
+                    <div class="company-details">
+                        Musterstraße 123<br>
+                        12345 Musterstadt<br>
+                        Tel: +49 (0) 123 456789<br>
+                        E-Mail: info@ihre-firma.de<br>
+                        www.ihre-firma.de
+                    </div>
+                </div>
+                <div class="invoice-title">
+                    <h1>RECHNUNG</h1>
+                    <div class="invoice-number">Nr. 2024-001</div>
+                </div>
+            </div>
+
+            <!-- Empfänger -->
+            <div class="recipient">
+                <div class="recipient-label">Empfänger:</div>
+                <div class="recipient-address">
+                    <strong>Max Mustermann</strong><br>
+                    Beispielweg 456<br>
+                    54321 Beispielstadt
+                </div>
+            </div>
+
+            <!-- Rechnungsdetails -->
+            <div class="invoice-details">
+                <div class="detail-item">
+                    <div class="detail-label">Rechnungsdatum:</div>
+                    <div class="detail-value">08.12.2024</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Leistungsdatum:</div>
+                    <div class="detail-value">01.12.2024</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Kundennummer:</div>
+                    <div class="detail-value">K-12345</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Zahlungsziel:</div>
+                    <div class="detail-value">14 Tage</div>
+                </div>
+            </div>
+
+            <!-- Tabelle -->
+            <table class="invoice-table">
+                <thead>
+                    <tr>
+                        <th>Pos.</th>
+                        <th>Beschreibung</th>
+                        <th class="text-center">Menge</th>
+                        <th class="text-right">Einzelpreis</th>
+                        <th class="text-right">Gesamt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Rhetorik-Training Grundkurs</td>
+                        <td class="text-center">1</td>
+                        <td class="text-right">450,00 €</td>
+                        <td class="text-right">450,00 €</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Einzelcoaching (2 Stunden)</td>
+                        <td class="text-center">2</td>
+                        <td class="text-right">120,00 €</td>
+                        <td class="text-right">240,00 €</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Schulungsmaterial</td>
+                        <td class="text-center">1</td>
+                        <td class="text-right">35,00 €</td>
+                        <td class="text-right">35,00 €</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Summen -->
+            <div class="totals">
+                <div class="total-row subtotal">
+                    <span>Zwischensumme:</span>
+                    <span>725,00 €</span>
+                </div>
+                <div class="total-row tax">
+                    <span>MwSt. 19%:</span>
+                    <span>137,75 €</span>
+                </div>
+                <div class="total-row final">
+                    <span>Gesamtbetrag:</span>
+                    <span>862,75 €</span>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <div class="payment-info">
+                    <h3>Zahlungsinformationen</h3>
+                    <div class="payment-details">
+                        <strong>Bankverbindung:</strong><br>
+                        Kontoinhaber: Ihre Firma GmbH<br>
+                        IBAN: DE89 1234 5678 9012 3456 78<br>
+                        BIC: ABCDEFGH123<br>
+                        Bank: Musterbank
+                    </div>
+                </div>
+
+                <div class="footer-note">
+                    Geschäftsführer: Max Mustermann | Registergericht: Amtsgericht Musterstadt | HRB 12345<br>
+                    USt-IdNr.: DE123456789 | Steuernummer: 123/456/78910<br>
+                    <br>
+                    Vielen Dank für Ihr Vertrauen!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Zentrale Konfiguration mit allen Standardwerten
+        const invoiceConfig = {
+            company: {
+                name: "Edward Ludwig-Morell",
+                address: `Freytagstr. 2
+                    38104 Braunschweig
+                    Tel: +49 (0) 123 456789
+                    E-Mail: info@ihre-firma.de
+                    www.ihre-firma.de`
+            },
+            recipient: {
+                name: "Max Mustermann",
+                address: `Beispielweg 456
+54321 Beispielstadt`
+            },
+            invoice: {
+                number: "2024-001",
+                date: "2024-12-08",
+                serviceDate: "01.12.2024",
+                customerNumber: "K-12345",
+                paymentTerm: "14 Tage",
+                includeTax: true,
+                taxRate: 0.19
+            },
+            payment: {
+                accountHolder: "Ihre Firma GmbH",
+                iban: "DE89 1234 5678 9012 3456 78",
+                bic: "ABCDEFGH123",
+                bank: "Musterbank"
+            },
+            footer: {
+                companyDetails: `Geschäftsführer: Max Mustermann | Registergericht: Amtsgericht Musterstadt | HRB 12345
+USt-IdNr.: DE123456789 | Steuernummer: 123/456/78910`,
+                thankYouMessage: "Vielen Dank für Ihr Vertrauen!"
+            }
+        };
+
+        // Datenstruktur für Rechnungspositionen
+        let invoiceItems = [
+            { description: "Rhetorik-Training Grundkurs", quantity: 1, price: 450.00 },
+            { description: "Einzelcoaching (2 Stunden)", quantity: 2, price: 120.00 },
+            { description: "Schulungsmaterial", quantity: 1, price: 35.00 }
+        ];
+
+        // Vorschlagsliste für Dienstleistungen
+        const serviceTemplates = [
+            // Design & Konzept
+            { category: "Design & Konzept", description: "Website Redesign - Konzept und Design", price: 1200.00 },
+            { category: "Design & Konzept", description: "UI/UX Design - Benutzeroberfläche", price: 800.00 },
+            { category: "Design & Konzept", description: "Logo Design und Branding", price: 450.00 },
+            { category: "Design & Konzept", description: "Wireframes und Mockups", price: 350.00 },
+            { category: "Design & Konzept", description: "Style Guide Erstellung", price: 280.00 },
+
+            // Responsive & Frontend
+            { category: "Responsive & Frontend", description: "Responsive Umsetzung (Mobile, Tablet, Desktop)", price: 800.00 },
+            { category: "Responsive & Frontend", description: "Mobile-First Entwicklung", price: 650.00 },
+            { category: "Responsive & Frontend", description: "Cross-Browser Optimierung", price: 300.00 },
+            { category: "Responsive & Frontend", description: "HTML/CSS/JavaScript Entwicklung", price: 500.00 },
+            { category: "Responsive & Frontend", description: "Animation und Interaktionen", price: 400.00 },
+
+            // WordPress
+            { category: "WordPress", description: "WordPress Integration und Theme-Entwicklung", price: 950.00 },
+            { category: "WordPress", description: "WordPress Installation und Konfiguration", price: 250.00 },
+            { category: "WordPress", description: "Custom Post Types Entwicklung", price: 350.00 },
+            { category: "WordPress", description: "Plugin-Integration und Anpassung", price: 280.00 },
+            { category: "WordPress", description: "WooCommerce Shop-Einrichtung", price: 800.00 },
+            { category: "WordPress", description: "WordPress Wartung (pro Monat)", price: 120.00 },
+
+            // Entwicklung
+            { category: "Entwicklung", description: "Backend-Entwicklung (PHP/Node.js)", price: 700.00 },
+            { category: "Entwicklung", description: "Datenbank Design und Integration", price: 550.00 },
+            { category: "Entwicklung", description: "API Integration (Drittanbieter)", price: 450.00 },
+            { category: "Entwicklung", description: "Kontaktformular mit Validierung", price: 180.00 },
+            { category: "Entwicklung", description: "Newsletter-Integration", price: 220.00 },
+
+            // SEO & Performance
+            { category: "SEO & Performance", description: "SEO Optimierung - On-Page", price: 450.00 },
+            { category: "SEO & Performance", description: "Performance Optimierung", price: 380.00 },
+            { category: "SEO & Performance", description: "Google Analytics Einrichtung", price: 150.00 },
+            { category: "SEO & Performance", description: "Meta-Tags und Schema.org Markup", price: 200.00 },
+
+            // Content & Medien
+            { category: "Content & Medien", description: "Bildoptimierung und Komprimierung", price: 120.00 },
+            { category: "Content & Medien", description: "Content Migration (pro Seite)", price: 45.00 },
+            { category: "Content & Medien", description: "Texterstellung (pro Seite)", price: 150.00 },
+            { category: "Content & Medien", description: "Stockfoto-Recherche und Lizenzierung", price: 80.00 },
+
+            // Testing & Launch
+            { category: "Testing & Launch", description: "Browser-Testing (alle gängigen Browser)", price: 250.00 },
+            { category: "Testing & Launch", description: "Mobile Device Testing", price: 200.00 },
+            { category: "Testing & Launch", description: "Go-Live Support und Deployment", price: 300.00 },
+            { category: "Testing & Launch", description: "SSL-Zertifikat Installation", price: 120.00 },
+
+            // Schulung & Support
+            { category: "Schulung & Support", description: "WordPress Schulung (2 Stunden)", price: 240.00 },
+            { category: "Schulung & Support", description: "Technischer Support (pro Stunde)", price: 85.00 },
+            { category: "Schulung & Support", description: "Dokumentation und Handbuch", price: 350.00 },
+
+            // Zusatzleistungen
+            { category: "Zusatzleistungen", description: "Hosting Setup (erstes Jahr)", price: 180.00 },
+            { category: "Zusatzleistungen", description: "Domain-Registrierung und Setup", price: 50.00 },
+            { category: "Zusatzleistungen", description: "E-Mail-Konten Einrichtung", price: 120.00 },
+            { category: "Zusatzleistungen", description: "Backup-Lösung Implementation", price: 200.00 },
+            { category: "Zusatzleistungen", description: "DSGVO-Konformität (Cookie Banner, Datenschutz)", price: 280.00 }
+        ];
+
+        // Initialisierung
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeFormFields();
+            populateServiceTemplates();
+            updateInvoiceDisplay();
+            updateInvoiceTable();
+            updatePositionsList();
+        });
+
+        // Formularfelder mit Standardwerten initialisieren
+        function initializeFormFields() {
+            document.getElementById('companyName').value = invoiceConfig.company.name;
+            document.getElementById('companyAddress').value = invoiceConfig.company.address;
+            document.getElementById('recipientName').value = invoiceConfig.recipient.name;
+            document.getElementById('recipientAddress').value = invoiceConfig.recipient.address;
+            document.getElementById('invoiceNumber').value = invoiceConfig.invoice.number;
+            document.getElementById('invoiceDate').value = invoiceConfig.invoice.date;
+            document.getElementById('includeTax').checked = invoiceConfig.invoice.includeTax;
+        }
+
+        // Rechnung mit Standardwerten anzeigen
+        function updateInvoiceDisplay() {
+            // Firmeninformationen
+            document.querySelector('.company-name').textContent = invoiceConfig.company.name;
+            document.querySelector('.company-details').innerHTML = invoiceConfig.company.address.replace(/\n/g, '<br>');
+
+            // Rechnungsnummer
+            document.querySelector('.invoice-number').textContent = `Nr. ${invoiceConfig.invoice.number}`;
+
+            // Empfänger
+            document.querySelector('.recipient-address').innerHTML =
+                `<strong>${invoiceConfig.recipient.name}</strong><br>${invoiceConfig.recipient.address.replace(/\n/g, '<br>')}`;
+
+            // Rechnungsdetails
+            const dateObj = new Date(invoiceConfig.invoice.date);
+            const formattedDate = dateObj.toLocaleDateString('de-DE');
+            const detailItems = document.querySelectorAll('.invoice-details .detail-item');
+            detailItems[0].querySelector('.detail-value').textContent = formattedDate;
+            detailItems[1].querySelector('.detail-value').textContent = invoiceConfig.invoice.serviceDate;
+            detailItems[2].querySelector('.detail-value').textContent = invoiceConfig.invoice.customerNumber;
+            detailItems[3].querySelector('.detail-value').textContent = invoiceConfig.invoice.paymentTerm;
+
+            // Zahlungsinformationen
+            document.querySelector('.payment-details').innerHTML = `
+                <strong>Bankverbindung:</strong><br>
+                Kontoinhaber: ${invoiceConfig.payment.accountHolder}<br>
+                IBAN: ${invoiceConfig.payment.iban}<br>
+                BIC: ${invoiceConfig.payment.bic}<br>
+                Bank: ${invoiceConfig.payment.bank}
+            `;
+
+            // Footer
+            document.querySelector('.footer-note').innerHTML = `
+                ${invoiceConfig.footer.companyDetails}<br>
+                <br>
+                ${invoiceConfig.footer.thankYouMessage}
+            `;
+        }
+
+        // PDF Druck-Dialog öffnen
+        function printToPDF() {
+            window.print();
+        }
+
+        // Dropdown mit Vorlagen befüllen
+        function populateServiceTemplates() {
+            const select = document.getElementById('serviceTemplate');
+            let currentCategory = '';
+
+            serviceTemplates.forEach((template, index) => {
+                if (template.category !== currentCategory) {
+                    currentCategory = template.category;
+                    const optgroup = document.createElement('optgroup');
+                    optgroup.label = currentCategory;
+                    select.appendChild(optgroup);
+                }
+
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = `${template.description} (${formatCurrency(template.price)})`;
+                select.lastChild.appendChild(option);
+            });
+        }
+
+        // Vorlage auswählen
+        function selectTemplate() {
+            const select = document.getElementById('serviceTemplate');
+            const index = select.value;
+
+            if (index !== '') {
+                const template = serviceTemplates[parseInt(index)];
+                document.getElementById('itemDescription').value = template.description;
+                document.getElementById('itemPrice').value = template.price;
+                document.getElementById('itemQuantity').value = 1;
+            }
+        }
+
+        // Firmeninformationen aktualisieren
+        function updateCompanyInfo() {
+            const name = document.getElementById('companyName').value;
+            const address = document.getElementById('companyAddress').value;
+
+            document.querySelector('.company-name').textContent = name;
+            document.querySelector('.company-details').innerHTML = address.replace(/\n/g, '<br>');
+        }
+
+        // Empfänger aktualisieren
+        function updateRecipient() {
+            const name = document.getElementById('recipientName').value;
+            const address = document.getElementById('recipientAddress').value;
+
+            document.querySelector('.recipient-address').innerHTML =
+                `<strong>${name}</strong><br>${address.replace(/\n/g, '<br>')}`;
+        }
+
+        // Rechnungsdetails aktualisieren
+        function updateInvoiceDetails() {
+            const number = document.getElementById('invoiceNumber').value;
+            const date = document.getElementById('invoiceDate').value;
+
+            document.querySelector('.invoice-number').textContent = `Nr. ${number}`;
+
+            // Datum formatieren
+            const dateObj = new Date(date);
+            const formattedDate = dateObj.toLocaleDateString('de-DE');
+            document.querySelector('.invoice-details .detail-item:first-child .detail-value').textContent = formattedDate;
+        }
+
+        // Position hinzufügen oder bearbeiten
+        function addOrUpdateItem() {
+            const description = document.getElementById('itemDescription').value.trim();
+            const quantity = parseInt(document.getElementById('itemQuantity').value);
+            const price = parseFloat(document.getElementById('itemPrice').value);
+            const editingIndex = document.getElementById('editingIndex').value;
+
+            if (!description || quantity <= 0 || price < 0) {
+                alert('Bitte füllen Sie alle Felder korrekt aus!');
+                return;
+            }
+
+            const item = { description, quantity, price };
+
+            if (editingIndex !== '') {
+                // Bearbeiten
+                invoiceItems[parseInt(editingIndex)] = item;
+                document.getElementById('editingIndex').value = '';
+                document.getElementById('addItemBtn').textContent = 'Position hinzufügen';
+            } else {
+                // Hinzufügen
+                invoiceItems.push(item);
+            }
+
+            // Formular zurücksetzen
+            document.getElementById('itemDescription').value = '';
+            document.getElementById('itemQuantity').value = '1';
+            document.getElementById('itemPrice').value = '0';
+
+            updateInvoiceTable();
+            updatePositionsList();
+        }
+
+        // Position bearbeiten
+        function editItem(index) {
+            const item = invoiceItems[index];
+            document.getElementById('itemDescription').value = item.description;
+            document.getElementById('itemQuantity').value = item.quantity;
+            document.getElementById('itemPrice').value = item.price;
+            document.getElementById('editingIndex').value = index;
+            document.getElementById('addItemBtn').textContent = 'Position aktualisieren';
+
+            // Scroll zum Formular
+            document.querySelector('.editor-section h3').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Position löschen
+        function deleteItem(index) {
+            if (confirm('Möchten Sie diese Position wirklich löschen?')) {
+                invoiceItems.splice(index, 1);
+                updateInvoiceTable();
+                updatePositionsList();
+            }
+        }
+
+        // Rechnungstabelle aktualisieren
+        function updateInvoiceTable() {
+            const tbody = document.querySelector('.invoice-table tbody');
+            tbody.innerHTML = '';
+
+            let subtotal = 0;
+
+            invoiceItems.forEach((item, index) => {
+                const total = item.quantity * item.price;
+                subtotal += total;
+
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${item.description}</td>
+                    <td class="text-center">${item.quantity}</td>
+                    <td class="text-right">${formatCurrency(item.price)}</td>
+                    <td class="text-right">${formatCurrency(total)}</td>
+                `;
+            });
+
+            // Summen aktualisieren
+            const includeTax = document.getElementById('includeTax').checked;
+            const tax = includeTax ? subtotal * invoiceConfig.invoice.taxRate : 0;
+            const total = subtotal + tax;
+
+            document.querySelector('.total-row.subtotal span:last-child').textContent = formatCurrency(subtotal);
+
+            // MwSt.-Zeile ein-/ausblenden
+            const taxRow = document.querySelector('.total-row.tax');
+            const taxPercentage = Math.round(invoiceConfig.invoice.taxRate * 100);
+            taxRow.querySelector('span:first-child').textContent = `MwSt. ${taxPercentage}%:`;
+
+            if (includeTax) {
+                taxRow.style.display = 'flex';
+                taxRow.querySelector('span:last-child').textContent = formatCurrency(tax);
+            } else {
+                taxRow.style.display = 'none';
+            }
+
+            document.querySelector('.total-row.final span:last-child').textContent = formatCurrency(total);
+        }
+
+        // Mehrwertsteuer ein-/ausschalten
+        function toggleTax() {
+            updateInvoiceTable();
+        }
+
+        // Positionen-Liste in der Sidebar aktualisieren
+        function updatePositionsList() {
+            const list = document.getElementById('positionsList');
+
+            if (invoiceItems.length === 0) {
+                list.innerHTML = '<p class="info-text">Keine Positionen vorhanden</p>';
+                return;
+            }
+
+            list.innerHTML = invoiceItems.map((item, index) => {
+                const total = item.quantity * item.price;
+                return `
+                    <div class="position-item">
+                        <div class="position-item-header">
+                            <div class="position-item-title">${item.description}</div>
+                            <div class="position-item-actions">
+                                <button class="btn btn-edit" onclick="editItem(${index})">✏️</button>
+                                <button class="btn btn-danger" onclick="deleteItem(${index})">🗑️</button>
+                            </div>
+                        </div>
+                        <div class="position-item-details">
+                            Menge: ${item.quantity} × ${formatCurrency(item.price)}
+                        </div>
+                        <div class="position-item-price">
+                            Gesamt: ${formatCurrency(total)}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Währung formatieren
+        function formatCurrency(amount) {
+            return amount.toLocaleString('de-DE', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }) + ' €';
+        }
+    </script>
+</body>
+
+</html>

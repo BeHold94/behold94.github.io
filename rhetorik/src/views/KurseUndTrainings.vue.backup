@@ -1,0 +1,368 @@
+<script setup lang="ts">
+import { useHead } from '@unhead/vue'
+import CtaSection from '../components/CtaSection.vue'
+
+useHead({
+  title: 'Kurse & Trainings | Rhetoriktraining Maximilian Höslinger',
+  meta: [
+    {
+      name: 'description',
+      content: 'Professionelle Rhetorikseminare: Grundlagentraining, Körpersprache & Präsenz, Stimme & Atmung, Inhalt & Struktur und mehr.',
+    },
+  ],
+})
+</script>
+
+<template>
+  <div class="kurse-und-trainings">
+    <!-- Hero Section -->
+    <section class="bg-primary-600 py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row gap-8 md:gap-16">
+          <!-- Left: Label -->
+          <div class="md:w-1/4">
+            <p class="text-md font-serif text-white uppercase tracking-wide opacity-90">
+              MEIN KURSANGEBOT
+            </p>
+          </div>
+          <!-- Right: Main Content -->
+          <div class="md:w-3/4">
+            <h1 class="text-4xl md:text-5xl font-semi-bold text-white mb-6">
+              Professionelle <span class="text-secondary-500">Rhetorikseminare</span> für starke Rednerpersönlichkeiten
+            </h1>
+            <p class="text-xl text-white opacity-90">
+              Rhetorik Training, Schwerpunkt Training oder individuelles Coaching – finden Sie das passende Format
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="space-y-20">
+          
+          <!-- ============================================
+               KATEGORIE 1: RHETORIK TRAINING
+               ============================================ -->
+          <div>
+            <div class="mb-12">
+              <h2 class="text-4xl font-bold text-primary-600 mb-4">
+                Rhetorik Training
+              </h2>
+              <p class="text-xl text-gray-700 max-w-3xl">
+                Das umfassende Programm in zwei aufeinander aufbauenden Modulen. Hier lernen Sie alle Grundlagen 
+                der Rhetorik und können Ihre Fähigkeiten im Fortgeschrittenen-Modul weiter vertiefen.
+              </p>
+            </div>
+
+            <div class="space-y-16">
+              
+              <!-- Modul 1: Rhetorik Grundlagen -->
+              <div class="flex flex-col md:flex-row gap-12">
+            <div class="w-full md:w-1/3">
+              <div class="bg-gray-100 h-64 flex items-center justify-center">
+                <span class="text-gray-400 text-lg">Kursbild</span>
+              </div>
+            </div>
+            <div class="w-full md:w-2/3">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="inline-block bg-primary-600 text-white px-4 py-1 text-sm font-semibold">
+                  MODUL 1
+                </span>
+                <span class="inline-block bg-gray-200 text-gray-700 px-4 py-1 text-sm font-semibold">
+                  ANFÄNGER
+                </span>
+              </div>
+              <h3 class="text-3xl font-semibold text-primary-600 mb-4">
+                Rhetorik Grundlagen
+              </h3>
+              <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                Das Fundament für überzeugende Kommunikation. In diesem Basistraining lernen Sie alle 
+                wichtigen rhetorischen Grundlagen kennen und entwickeln ein Gefühl für Ihre Wirkung 
+                als Redner.
+              </p>
+              <div class="mb-6">
+                <h3 class="font-semibold text-gray-900 mb-2">Inhalte:</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                  <li>Aufbau und Struktur von Reden</li>
+                  <li>Körpersprache und Präsenz</li>
+                  <li>Stimmliche Grundlagen</li>
+                  <li>Umgang mit Lampenfieber</li>
+                  <li>Interaktion mit dem Publikum</li>
+                </ul>
+              </div>
+              <RouterLink to="/kontakt"
+                class="inline-block bg-primary-600 text-white px-8 py-3 font-semibold hover:bg-primary-500 transition-colors">
+                ANFRAGEN
+              </RouterLink>
+            </div>
+          </div>
+
+          <div class="border-t-2 border-gray-200"></div>
+
+          <!-- Course 2: Körpersprache & Präsenz -->
+          <div class="flex flex-col md:flex-row-reverse gap-12">
+            <div class="w-full md:w-1/3">
+              <div class="bg-gray-100 h-64 flex items-center justify-center">
+                <span class="text-gray-400 text-lg">Kursbild</span>
+              </div>
+            </div>
+            <div class="w-full md:w-2/3">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="inline-block bg-primary-600 text-white px-4 py-1 text-sm font-semibold">
+                  ANFÄNGER
+                </span>
+                <span class="inline-block bg-gray-600 text-white px-4 py-1 text-sm font-semibold">
+                  FORTGESCHRITTEN
+                </span>
+              </div>
+              <h2 class="text-3xl font-semibold text-primary-600 mb-4">
+                Körpersprache & Präsenz
+              </h2>
+              <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                Ihre Körpersprache spricht oft lauter als Worte. Lernen Sie, bewusst mit Ihrer 
+                Körpersprache umzugehen und eine starke Präsenz im Raum zu entwickeln.
+              </p>
+              <div class="mb-6">
+                <h3 class="font-semibold text-gray-900 mb-2">Inhalte:</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                  <li>Bewusste Körperhaltung und Gestik</li>
+                  <li>Raumnutzung und Positionierung</li>
+                  <li>Blickkontakt und Mimik</li>
+                  <li>Authentische Präsenz entwickeln</li>
+                  <li>Wirkung von Körpersprache verstehen</li>
+                </ul>
+              </div>
+              <RouterLink to="/kontakt"
+                class="inline-block bg-primary-600 text-white px-8 py-3 font-semibold hover:bg-primary-500 transition-colors">
+                ANFRAGEN
+              </RouterLink>
+            </div>
+          </div>
+
+          <div class="border-t-2 border-gray-200"></div>
+
+          <!-- Course 3: Stimme & Atmung -->
+          <div class="flex flex-col md:flex-row gap-12">
+            <div class="w-full md:w-1/3">
+              <div class="bg-gray-100 h-64 flex items-center justify-center">
+                <span class="text-gray-400 text-lg">Kursbild</span>
+              </div>
+            </div>
+            <div class="w-full md:w-2/3">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="inline-block bg-primary-600 text-white px-4 py-1 text-sm font-semibold">
+                  ANFÄNGER
+                </span>
+                <span class="inline-block bg-gray-600 text-white px-4 py-1 text-sm font-semibold">
+                  FORTGESCHRITTEN
+                </span>
+              </div>
+              <h2 class="text-3xl font-semibold text-primary-600 mb-4">
+                Stimme & Atmung
+              </h2>
+              <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                Ihre Stimme ist Ihr wichtigstes Werkzeug. Entdecken Sie das volle Potenzial 
+                Ihrer Stimme und lernen Sie, sie bewusst und wirkungsvoll einzusetzen.
+              </p>
+              <div class="mb-6">
+                <h3 class="font-semibold text-gray-900 mb-2">Inhalte:</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                  <li>Atemtechnik für kraftvolles Sprechen</li>
+                  <li>Stimmmodulation und Varianz</li>
+                  <li>Artikulation und Deutlichkeit</li>
+                  <li>Tempo und Pausen gezielt einsetzen</li>
+                  <li>Stimmbelastung vermeiden</li>
+                </ul>
+              </div>
+              <RouterLink to="/kontakt"
+                class="inline-block bg-primary-600 text-white px-8 py-3 font-semibold hover:bg-primary-500 transition-colors">
+                ANFRAGEN
+              </RouterLink>
+            </div>
+          </div>
+
+          <div class="border-t-2 border-gray-200"></div>
+
+          <!-- Course 4: Inhalt & Struktur -->
+          <div class="flex flex-col md:flex-row-reverse gap-12">
+            <div class="w-full md:w-1/3">
+              <div class="bg-gray-100 h-64 flex items-center justify-center">
+                <span class="text-gray-400 text-lg">Kursbild</span>
+              </div>
+            </div>
+            <div class="w-full md:w-2/3">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="inline-block bg-primary-600 text-white px-4 py-1 text-sm font-semibold">
+                  ANFÄNGER
+                </span>
+                <span class="inline-block bg-gray-600 text-white px-4 py-1 text-sm font-semibold">
+                  FORTGESCHRITTEN
+                </span>
+              </div>
+              <h2 class="text-3xl font-semibold text-primary-600 mb-4">
+                Inhalt & Struktur
+              </h2>
+              <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                Der richtige Aufbau und die präzise Formulierung machen den Unterschied. 
+                Lernen Sie, Ihre Argumente klar zu strukturieren und überzeugend zu präsentieren.
+              </p>
+              <div class="mb-6">
+                <h3 class="font-semibold text-gray-900 mb-2">Inhalte:</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                  <li>Aufbau überzeugender Argumente</li>
+                  <li>Strukturierungstechniken für Reden</li>
+                  <li>Rhetorische Stilmittel gezielt einsetzen</li>
+                  <li>Kernbotschaften formulieren</li>
+                  <li>Storytelling und Beispiele nutzen</li>
+                </ul>
+              </div>
+              <RouterLink to="/kontakt"
+                class="inline-block bg-primary-600 text-white px-8 py-3 font-semibold hover:bg-primary-500 transition-colors">
+                ANFRAGEN
+              </RouterLink>
+            </div>
+          </div>
+
+          <div class="border-t-2 border-gray-200"></div>
+
+          <!-- Course 5: Rhetorik für Fortgeschrittene -->
+          <div class="flex flex-col md:flex-row gap-12">
+            <div class="w-full md:w-1/3">
+              <div class="bg-gray-100 h-64 flex items-center justify-center">
+                <span class="text-gray-400 text-lg">Kursbild</span>
+              </div>
+            </div>
+            <div class="w-full md:w-2/3">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="inline-block bg-gray-600 text-white px-4 py-1 text-sm font-semibold">
+                  FORTGESCHRITTEN
+                </span>
+              </div>
+              <h2 class="text-3xl font-semibold text-primary-600 mb-4">
+                Rhetorik für Fortgeschrittene
+              </h2>
+              <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                Verfeinern Sie Ihre rhetorischen Fähigkeiten auf Meisterniveau. Dieses Training 
+                richtet sich an erfahrene Redner, die ihre Wirkung weiter optimieren möchten.
+              </p>
+              <div class="mb-6">
+                <h3 class="font-semibold text-gray-900 mb-2">Inhalte:</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                  <li>Fortgeschrittene rhetorische Techniken</li>
+                  <li>Situative Anpassung und Flexibilität</li>
+                  <li>Umgang mit schwierigen Redesituationen</li>
+                  <li>Debattentechniken und Schlagfertigkeit</li>
+                  <li>Feinschliff der persönlichen Rednerpersönlichkeit</li>
+                </ul>
+              </div>
+              <RouterLink to="/kontakt"
+                class="inline-block bg-primary-600 text-white px-8 py-3 font-semibold hover:bg-primary-500 transition-colors">
+                ANFRAGEN
+              </RouterLink>
+            </div>
+          </div>
+
+          <div class="border-t-2 border-gray-200"></div>
+
+          <!-- Course 6: Individuelles Einzeltraining -->
+          <div class="flex flex-col md:flex-row-reverse gap-12">
+            <div class="w-full md:w-1/3">
+              <div class="bg-gray-100 h-64 flex items-center justify-center">
+                <span class="text-gray-400 text-lg">Kursbild</span>
+              </div>
+            </div>
+            <div class="w-full md:w-2/3">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="inline-block bg-primary-600 text-white px-4 py-1 text-sm font-semibold">
+                  ANFÄNGER
+                </span>
+                <span class="inline-block bg-gray-600 text-white px-4 py-1 text-sm font-semibold">
+                  FORTGESCHRITTEN
+                </span>
+              </div>
+              <h2 class="text-3xl font-semibold text-primary-600 mb-4">
+                Individuelles Einzeltraining
+              </h2>
+              <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                Maßgeschneidertes Training für Ihre spezifischen Bedürfnisse. Ob Vorbereitung auf 
+                eine konkrete Redesituation oder langfristige Begleitung – ich gehe individuell 
+                auf Ihre Ziele ein.
+              </p>
+              <div class="mb-6">
+                <h3 class="font-semibold text-gray-900 mb-2">Mögliche Themen:</h3>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                  <li>Vorbereitung auf wichtige Präsentationen</li>
+                  <li>Bewerbungsgespräche und Vorstellungen</li>
+                  <li>Hochzeitsreden und private Anlässe</li>
+                  <li>Medientraining und Interviews</li>
+                  <li>Alle anderen rhetorikbezogenen Themen</li>
+                </ul>
+              </div>
+              <RouterLink to="/kontakt"
+                class="inline-block bg-primary-600 text-white px-8 py-3 font-semibold hover:bg-primary-500 transition-colors">
+                ANFRAGEN
+              </RouterLink>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-6">
+        <h2 class="text-3xl font-semibold text-primary-600 mb-8">
+          Allgemeine Informationen
+        </h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">
+              Gruppengröße
+            </h3>
+            <p class="text-gray-700">
+              Für optimale Lernerfolge arbeite ich mit kleinen Gruppen von maximal 8 Teilnehmern. 
+              So kann ich auf jeden individuell eingehen.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">
+              Dauer
+            </h3>
+            <p class="text-gray-700">
+              Die Trainings erstrecken sich je nach Format über ein bis drei Tage. 
+              Einzeltrainings werden individuell vereinbart.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">
+              Methodik
+            </h3>
+            <p class="text-gray-700">
+              Praxisnahe Übungen, individuelles Feedback und Videoanalyse sind fester Bestandteil 
+              aller Trainings. Theorie wird nur vermittelt, wo sie direkt umsetzbar ist.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">
+              Termine
+            </h3>
+            <p class="text-gray-700">
+              Die konkreten Termine stimmen wir gemeinsam ab. Sowohl Wochenend- als auch 
+              Wochentermine sind möglich.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <CtaSection />
+  </div>
+</template>
+
+<style scoped>
+</style>
