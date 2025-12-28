@@ -21,7 +21,7 @@ useHead({
         <div class="bg-primary-600 flex flex-col md:grid md:grid-cols-12 items-stretch overflow-hidden">
           <!-- Image Left (7/12) -->
           <div class="md:col-span-7">
-            <img src="@/assets/images/kursangebote.jpg" alt="Kursangebote" 
+            <img src="@/assets/images/kursangebote.jpg" alt="Kursangebote"
               class="w-full h-full object-cover min-h-[400px] md:min-h-[600px]" />
           </div>
 
@@ -36,9 +36,9 @@ useHead({
                 Professionelle Rhetorikseminare für starke Redner&shy;persönlich&shy;keiten
               </h1>
               <p class="text-lg text-white leading-relaxed opacity-90">
-                Ob im Beruf oder im privaten Umfeld: Überzeugende Kommunikation ist essentiell. 
-                Meine Rhetorikseminare vermitteln die Grundlagen mit unterschiedlichem Fokus und Tiefgang. 
-                Von Allgemeinen Trainings über Schwerpunkt-Module bis hin zu individuellem Coaching – 
+                Ob im Beruf oder im privaten Umfeld: Überzeugende Kommunikation ist essentiell.
+                Meine Rhetorikseminare vermitteln die Grundlagen mit unterschiedlichem Fokus und Tiefgang.
+                Von Allgemeinen Trainings über Schwerpunkt-Module bis hin zu individuellem Coaching –
                 hier finden Sie das passende Format für Ihre Ziele.
               </p>
             </div>
@@ -50,17 +50,21 @@ useHead({
     <!-- Courses Section -->
     <section class="py-20 bg-white">
       <div class="max-w-7xl mx-auto px-6">
-        <h2 class="text-4xl font-bold text-primary-600 mb-12">
+        <h2 class="text-4xl font-bold text-primary-600 mb-8">
           Trainingsangebot
         </h2>
-        
+        <p class="text-lg text-gray-700 leading-relaxed mb-12 max-w-4xl">
+          Ich biete Ihnen konkrete Kurse mit definierten Inhalten an. Jeder Kurs kann angepasst, erweitert oder gekürzt
+          werden – ganz nach Ihren (zeitlichen) Vorstellungen. Gemeinsam entwickeln wir auf Wunsch ein für Sie
+          angepasstes Seminar, das genau zu Ihren Zielen passt und auf Ihre Trainingsschwerpunkte eingeht. Sprechen Sie
+          mich dazu gerne an.
+        </p>
         <div class="grid md:grid-cols-3 gap-8">
-          
+
           <!-- Karte 1: Allgemeines Rhetorik Training -->
-          <RouterLink to="/kurse/allgemeines-rhetorik-training" 
-            class="cursor-pointer group flex flex-col">
+          <RouterLink to="/kurse/allgemeines-rhetorik-training" class="cursor-pointer group flex flex-col">
             <div class="h-64 md:h-80 overflow-hidden">
-              <img src="@/assets/images/allgtraining.jpg" alt="Allgemeines Rhetorik Training" 
+              <img src="@/assets/images/allgtraining.jpg" alt="Allgemeines Rhetorik Training"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
             </div>
             <div class="bg-gray-50 p-6 flex flex-col flex-grow">
@@ -80,10 +84,9 @@ useHead({
           </RouterLink>
 
           <!-- Karte 2: Schwerpunkt Training -->
-          <RouterLink to="/kurse/schwerpunkt-training"
-            class="cursor-pointer group flex flex-col">
+          <RouterLink to="/kurse/schwerpunkt-training" class="cursor-pointer group flex flex-col">
             <div class="h-64 md:h-80 overflow-hidden">
-              <img src="@/assets/images/scherpunkt.png" alt="Schwerpunkt Training" 
+              <img src="@/assets/images/scherpunkt.png" alt="Schwerpunkt Training"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
             </div>
             <div class="bg-gray-50 p-6 flex flex-col flex-grow">
@@ -103,10 +106,9 @@ useHead({
           </RouterLink>
 
           <!-- Karte 3: Individual Training -->
-          <RouterLink to="/kurse/individual-training"
-            class="cursor-pointer group flex flex-col">
+          <RouterLink to="/kurse/individual-training" class="cursor-pointer group flex flex-col">
             <div class="h-64 md:h-80 overflow-hidden">
-              <img src="@/assets/images/individual.jpg" alt="Individual Training" 
+              <img src="@/assets/images/individual.jpg" alt="Individual Training"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
             </div>
             <div class="bg-gray-50 p-6 flex flex-col flex-grow">
@@ -141,7 +143,7 @@ useHead({
               Gruppengröße
             </h3>
             <p class="text-white opacity-90">
-              Für optimale Lernerfolge arbeite ich mit kleinen Gruppen von maximal 8 Teilnehmern. 
+              Für optimale Lernerfolge arbeite ich mit kleinen Gruppen von maximal 8 Teilnehmern.
               So kann ich auf jeden individuell eingehen.
             </p>
           </div>
@@ -150,7 +152,7 @@ useHead({
               Dauer
             </h3>
             <p class="text-white opacity-90">
-              Die Trainings erstrecken sich je nach Format über ein bis drei Tage. 
+              Die Trainings erstrecken sich je nach Format über ein bis drei Tage.
               Einzeltrainings werden individuell vereinbart.
             </p>
           </div>
@@ -159,7 +161,7 @@ useHead({
               Methodik
             </h3>
             <p class="text-white opacity-90">
-              Praxisnahe Übungen, individuelles Feedback und Videoanalyse sind fester Bestandteil 
+              Praxisnahe Übungen, individuelles Feedback und Videoanalyse sind fester Bestandteil
               aller Trainings. Theorie wird nur vermittelt, wo sie direkt umsetzbar ist.
             </p>
           </div>
@@ -168,7 +170,7 @@ useHead({
               Termine
             </h3>
             <p class="text-white opacity-90">
-              Die konkreten Termine stimmen wir gemeinsam ab. Sowohl Wochenend- als auch 
+              Die konkreten Termine stimmen wir gemeinsam ab. Sowohl Wochenend- als auch
               Wochentermine sind möglich.
             </p>
           </div>
@@ -181,5 +183,4 @@ useHead({
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

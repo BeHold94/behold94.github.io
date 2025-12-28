@@ -55,77 +55,44 @@ useHead({
             <div class="max-w-7xl mx-auto px-6">
                 <div class="mb-12">
                     <p class="text-md font-serif text-gray-500 uppercase tracking-wide mb-4">
-                        KURSFORMATE
+                        TRAININGSANGEBOT
                     </p>
                     <h2 class="text-3xl md:text-4xl font-semi-bold text-gray-900 mb-4">
                         Professionelle Rhetorikseminare für starke Rednerpersönlichkeiten
                     </h2>
                 </div>
 
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
                     <!-- Course 1 -->
-                    <RouterLink to="/kurse" class="group cursor-pointer">
+                    <RouterLink to="/kurse/allgemeines-rhetorik-training" class="group cursor-pointer bg-gray-50 p-6">
                         <h3 class="text-xl font-bold text-primary-600 mb-3 flex items-center gap-2">
-                            Grundlagentraining Rhetorik
+                            Allgemeines Rhetorik Training
                             <span class="text-primary-600 transition-transform group-hover:translate-x-1">⟶</span>
                         </h3>
                         <p class="text-gray-700">
-                            Basistraining für klare und überzeugende Kommunikation mit grundlegender Arbeit an Auftritt, Stimme und Struktur
+                            Umfassendes Programm in zwei Modulen für Anfänger und Fortgeschrittene.
                         </p>
                     </RouterLink>
 
                     <!-- Course 2 -->
-                    <RouterLink to="/kurse" class="group cursor-pointer">
+                    <RouterLink to="/kurse/schwerpunkt-training" class="group cursor-pointer bg-gray-50 p-6">
                         <h3 class="text-xl font-bold text-primary-600 mb-3 flex items-center gap-2">
-                            Körpersprache & Präsenz
+                            Schwerpunkt Training
                             <span class="text-primary-600 transition-transform group-hover:translate-x-1">⟶</span>
                         </h3>
                         <p class="text-gray-700">
-                            Training für Präsenz im Raum, selbstbewusstes Auftreten und lebendige Präsentation der eigenen Standpunkte
+                            Fokussierte Trainings zu spezifischen Themen wie Körpersprache, Stimme und Argumentation.
                         </p>
                     </RouterLink>
 
                     <!-- Course 3 -->
-                    <RouterLink to="/kurse" class="group cursor-pointer">
+                    <RouterLink to="/kurse/individual-training" class="group cursor-pointer bg-gray-50 p-6">
                         <h3 class="text-xl font-bold text-primary-600 mb-3 flex items-center gap-2">
-                            Stimme & Atmung
+                            Individual Training
                             <span class="text-primary-600 transition-transform group-hover:translate-x-1">⟶</span>
                         </h3>
                         <p class="text-gray-700">
-                            Training für die wichtigsten Werkzeuge in jeder Redesituation – Wege zu mehr Modulation und Varianz in der Stimme
-                        </p>
-                    </RouterLink>
-
-                    <!-- Course 4 -->
-                    <RouterLink to="/kurse" class="group cursor-pointer">
-                        <h3 class="text-xl font-bold text-primary-600 mb-3 flex items-center gap-2">
-                            Inhalt & Struktur
-                            <span class="text-primary-600 transition-transform group-hover:translate-x-1">⟶</span>
-                        </h3>
-                        <p class="text-gray-700">
-                            Fokus auf das gesprochene Wort durch Übungen zu Aufbau, Struktur und Formulierung von Argumenten und Reden
-                        </p>
-                    </RouterLink>
-
-                    <!-- Course 5 -->
-                    <RouterLink to="/kurse" class="group cursor-pointer">
-                        <h3 class="text-xl font-bold text-primary-600 mb-3 flex items-center gap-2">
-                            Rhetorik für Fortgeschrittene
-                            <span class="text-primary-600 transition-transform group-hover:translate-x-1">⟶</span>
-                        </h3>
-                        <p class="text-gray-700">
-                            Aufbaukurs mit Vertiefung zur Weiterentwicklung erfahrener Rednerpersönlichkeiten
-                        </p>
-                    </RouterLink>
-
-                    <!-- Course 6 -->
-                    <RouterLink to="/kurse" class="group cursor-pointer">
-                        <h3 class="text-xl font-bold text-primary-600 mb-3 flex items-center gap-2">
-                            Individuelles Einzeltraining
-                            <span class="text-primary-600 transition-transform group-hover:translate-x-1">⟶</span>
-                        </h3>
-                        <p class="text-gray-700">
-                            Ihr persönliches Training zur Vorbereitung einer konkreten Redesituation oder als begleitendes Feedback
+                            Maßgeschneidertes 1:1 Coaching für Ihre spezifischen Bedürfnisse und Ziele.
                         </p>
                     </RouterLink>
                 </div>
